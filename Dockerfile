@@ -31,7 +31,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build .
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
-CMD ["nginx", "-g", "daemon off;"]
 
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
